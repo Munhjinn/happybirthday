@@ -1,0 +1,31 @@
+.gift-box {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.gift-img {
+  width: 200px;
+  transition: transform 0.5s;
+}
+
+.open-gift {
+  position: relative;
+}
+
+.surprise-img {
+  position: absolute;
+  top: 30px; /* тохируулж болно */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  animation: pop 0.7s;
+}
+
+@keyframes pop {
+  0% { transform: translateX(-50%) scale(0); opacity: 0; }
+  80% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}

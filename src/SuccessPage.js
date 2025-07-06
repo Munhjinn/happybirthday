@@ -30,13 +30,16 @@ function SuccessPage() {
     if (isAnimating) return;
     setDirection(dir);
     setPrev(current);
+
+    setCurrent((prevIdx) =>
+      dir === "right"
+        ? (prevIdx + 1) % gifts.length
+        : (prevIdx - 1 + gifts.length) % gifts.length
+    );
+
     setIsAnimating(true);
+
     setTimeout(() => {
-      setCurrent((prevIdx) =>
-        dir === "right"
-          ? (prevIdx + 1) % gifts.length
-          : (prevIdx - 1 + gifts.length) % gifts.length
-      );
       setIsAnimating(false);
       setPrev(null);
     }, 1000);

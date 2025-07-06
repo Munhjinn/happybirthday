@@ -117,3 +117,108 @@
   /* optionally add a slight scale for more depth */
   /* transform: scale(0.98) translateX(-120%); */
 }
+
+.countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+
+.countdown-numbers {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 20px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-value {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #e63950; /* улаан өнгө */
+  line-height: 1;
+}
+
+.countdown-separator {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #e63950;
+  margin: 0 10px;
+  align-self: flex-start;
+  line-height: 0.8;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  color: #444;
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+.center-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.countdown-fixed-wrapper {
+  width: 400px;
+  height: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; /* дэлгэцний голд төвлөрүүлэх */
+  background: #fff; /* эсвэл өөр background */
+  border-radius: 16px; /* хүсвэл булан дугуйруулж болно */
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08); /* хүсвэл сүүдэр нэмэж болно */
+}
+
+@media (max-width: 400px) {
+  .countdown-numbers {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .countdown-separator {
+    display: none;
+  }
+  .countdown-title-top {
+    font-size: 2.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+  .countdown-title-bottom {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.countdown-title-top,
+.countdown-title-bottom {
+  font-family: 'Great Vibes', cursive;
+  color: #e63950;
+  text-align: center;
+  font-weight: normal;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.countdown-title-top {
+  font-size: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.countdown-title-bottom {
+  font-size: 3rem;
+  margin-bottom: 2.5rem;
+}

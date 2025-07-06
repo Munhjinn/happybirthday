@@ -5,12 +5,12 @@ import CountdownTimer from "./CountdownTimer";
 import SuccessPage from './SuccessPage';
 
 function App() {
-  const birthday = "2025-07-22:28:00";
+  const birthday = "2025-07-26T00:00:00";
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<CountdownTimer targetDate={birthday} />} />
+        <Route path="/" element={<div className="center-screen"><CountdownTimer targetDate={birthday} /></div>} />
         <Route path="/success" element={<SuccessPage />} />
       </Routes>
     </Router>

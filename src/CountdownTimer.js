@@ -43,10 +43,30 @@ function CountdownTimer({ targetDate }) {
   }, [timeLeft, navigate]);
 
   return (
-    <div className="countdown-bg">
-      <h1>
-        {timeLeft.days} Day {timeLeft.hours} hours {timeLeft.minutes} minutes {timeLeft.seconds} seconds
-      </h1>
+    <div className="countdown-container">
+      <h2 className="countdown-title-top">My Princess's</h2>
+      <h2 className="countdown-title-bottom">Birthday</h2>
+      <div className="countdown-numbers">
+        <div className="countdown-item">
+          <span className="countdown-value">{timeLeft.days}</span>
+          <span className="countdown-label">DAYS</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-item">
+          <span className="countdown-value">{timeLeft.hours}</span>
+          <span className="countdown-label">HOURS</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-item">
+          <span className="countdown-value">{timeLeft.minutes}</span>
+          <span className="countdown-label">MINUTES</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-item">
+          <span className="countdown-value">{timeLeft.seconds}</span>
+          <span className="countdown-label">SECONDS</span>
+        </div>
+      </div>
     </div>
   );
 }

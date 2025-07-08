@@ -5,12 +5,12 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "./App.css";
 
 const gifts = [
-  { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#ff8da1" },
-  { id: 2, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise2.jpg", type: "gift", bg: "#ffd166" },
-  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise3.jpeg", type: "gift", bg: "#8ecae6" },
-  { id: 4, letter: "/img/letter.jpg", type: "letter", bg: "#b7e4c7", message: "Төрсөн өдрийн баярын мэнд хүргэе! ..." }
+  { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#fC8EAC" },
+  { id: 2, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise2.jpg", type: "gift", bg: "#FCBACB" },
+  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise3.jpeg", type: "gift", bg: "#ECBDC4" },
+  // { id: 4, letter: "/img/letter.png", type: "letter", bg: "#ff9999", message: "Төрсөн өдрийн баярын мэнд хүргэе! ..." } 
 ];
-
+  
 function SuccessPage() {
   const [current, setCurrent] = useState(0);
   const [prev, setPrev] = useState(null);
@@ -57,7 +57,17 @@ function SuccessPage() {
       }}
     >
       <h1 className="birthday-title">Happy Birthday</h1>
-      <h2 className="birthday-subtitle">My Dear Princess</h2>
+      <h1 className="birthday-subtitle">My Dear Princess</h1>
+      <div className="letter-floating-wrapper">
+        <div className="letter-rope-wrapper">
+          <div className="letter-rope"></div>
+          <img
+            src="/img/letter.png"
+            alt="Letter"
+            className="letter-img"
+          />
+        </div>
+      </div>
       <div className="carousel">
         <button className="arrow left" onClick={() => handleArrow("left")} disabled={isAnimating}>
           <FaArrowLeft size={32} />

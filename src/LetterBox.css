@@ -9,9 +9,13 @@
   position: relative;
 }
 .letter-img {
-  width: 180px;
+  width: 100%;
+  max-width: 80px;
   height: auto;
-  margin-top: 20px;
+  display: block;
+  vertical-align: top;
+  margin: 0;
+  padding: 0;
 }
 .letter-img-open {
   transform: scale(1.2) rotateX(60deg);
@@ -38,4 +42,62 @@
 .letter-message-animate {
   opacity: 1;
   transform: scale(1);
+}
+.letter-floating-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+.letter-rope-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.letter-rope {
+  width: 6px;
+  height: 90px;
+  background: linear-gradient(180deg, #b08968 60%, #fff3e0 100%);
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 400px) {
+  .letter-floating-wrapper {
+    position: absolute;
+    width:90px;   /*hemjee*/
+    top: 0;
+    right: 0.5rem;
+    z-index: 10;
+  margin: 0;
+  padding: 0;
+  }
+  .letter-img {
+    max-width: 100px;  /*hemjee*/
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .letter-rope {
+    width: 4px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+  }
+  .letter-rope-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
 }

@@ -192,7 +192,7 @@
     display: none;
   }
   .countdown-title-top {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-top: 1.5rem;
     margin-bottom: 0.2rem;
   }
@@ -213,12 +213,45 @@
 }
 
 .countdown-title-top {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 
 .countdown-title-bottom {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 2.5rem;
+}
+
+.birthday-title {
+  font-family: 'Great Vibes', cursive;
+  color: #e63950;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 12rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.birthday-subtitle {
+  font-family: 'Great Vibes', cursive;
+  color: #e63950;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 400px) {
+  .birthday-title {
+    font-size: 2.2rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.2rem;
+  }
+  .birthday-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
 }

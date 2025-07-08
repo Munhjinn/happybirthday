@@ -5,10 +5,10 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "./App.css";
 
 const gifts = [
-  { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift" },
-  { id: 2, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise2.jpg", type: "gift" },
-  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise3.jpeg", type: "gift" },
-  { id: 4, letter: "/img/letter.jpg", type: "letter" }
+  { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#ff8da1" },
+  { id: 2, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise2.jpg", type: "gift", bg: "#ffd166" },
+  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise3.jpeg", type: "gift", bg: "#8ecae6" },
+  { id: 4, letter: "/img/letter.jpg", type: "letter", bg: "#b7e4c7", message: "Төрсөн өдрийн баярын мэнд хүргэе! ..." }
 ];
 
 function SuccessPage() {
@@ -45,9 +45,19 @@ function SuccessPage() {
     }, 1000);
   };
 
+  // Тухайн бэлэгний background өнгө
+  const bgColor = gifts[current].bg || "#fff";
+
   return (
-    <div className="App">
-      <h1>Төрсөн өдрийн мэнд хүргэе!</h1>
+    <div
+      className="App"
+      style={{
+        background: bgColor,
+        transition: "background 0.6s"
+      }}
+    >
+      <h1 className="birthday-title">Happy Birthday</h1>
+      <h2 className="birthday-subtitle">My Dear Princess</h2>
       <div className="carousel">
         <button className="arrow left" onClick={() => handleArrow("left")} disabled={isAnimating}>
           <FaArrowLeft size={32} />
@@ -61,7 +71,7 @@ function SuccessPage() {
                   openImg={gifts[prev].opened}
                   surpriseImg={gifts[prev].surprise}
                   open={opened[prev]}
-                  onOpen={() => handleOpen(prev)}
+                  onOpen={() => handleOpen(prev)}x
                 />
               ) : (
                 <LetterBox letterImg={gifts[prev].letter} />
@@ -78,7 +88,10 @@ function SuccessPage() {
                 onOpen={() => handleOpen(current)}
               />
             ) : (
-              <LetterBox letterImg={gifts[current].letter} />
+              <LetterBox
+                letterImg={gifts[current].letter}
+                message={gifts[current].message}
+              />
             )}
           </div>
         </div>

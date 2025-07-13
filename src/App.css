@@ -254,4 +254,11 @@ html, body {
   }
 }
 
+.App, .SuccessPage, .arrow, .gift, .letter {
+  position: relative;
+  z-index: 1;
+}
 
+.letter-message, .message {
+  font-family: 'Dancing Script', cursive;
+}

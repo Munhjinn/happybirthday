@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import GiftBox from "./GiftBox";
 import LetterBox from "./LetterBox";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "./App.css";
+import Rain from './Rain';
 
 const gifts = [
   { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#fC8EAC" },
@@ -17,6 +18,8 @@ function SuccessPage() {
   const [opened, setOpened] = useState(Array(gifts.length).fill(false));
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState("");
+  const [hasKey, setHasKey] = useState(false);
+  const [showLetter, setShowLetter] = useState(false);
 
   const handleOpen = (index) => {
     setOpened((prev) => {
@@ -48,6 +51,8 @@ function SuccessPage() {
   // Тухайн бэлэгний background өнгө
   const bgColor = gifts[current].bg || "#fff";
 
+  const onKeyFound = useCallback(() => setHasKey(true), []);
+
   return (
     <div
       className="App"
@@ -56,9 +61,15 @@ function SuccessPage() {
         transition: "background 0.6s"
       }}
     >
+      <Rain onKeyFound={onKeyFound} />
       <h1 className="birthday-title">Happy Birthday</h1>
       <h1 className="birthday-subtitle">My Dear Princess</h1>
-      <div className="letter-floating-wrapper">
+      {/* Хуучин floating letter icon-ыг click-д холбох */}
+      <div
+        className="letter-floating-wrapper"
+        style={{ cursor: "pointer" }}
+        onClick={() => setShowLetter(true)}
+      >
         <div className="letter-rope-wrapper">
           <div className="letter-rope"></div>
           <img
@@ -84,7 +95,11 @@ function SuccessPage() {
                   onOpen={() => handleOpen(prev)}x
                 />
               ) : (
-                <LetterBox letterImg={gifts[prev].letter} />
+                <LetterBox
+                  hasKey={hasKey}
+                  letterImg={gifts[prev].letter}
+                  message={gifts[prev].message}
+                />
               )}
             </div>
           )}
@@ -99,6 +114,7 @@ function SuccessPage() {
               />
             ) : (
               <LetterBox
+                hasKey={hasKey}
                 letterImg={gifts[current].letter}
                 message={gifts[current].message}
               />
@@ -109,8 +125,57 @@ function SuccessPage() {
           <FaArrowRight size={32} />
         </button>
       </div>
+
+      {/* Popup/modal захидал */}
+      {showLetter && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 100
+          }}
+          onClick={() => setShowLetter(false)}
+        >
+          <div
+            style={{
+              background: `url('/img/letterback.jpg') center center / contain no-repeat, #fff`,
+              padding: 40,
+              borderRadius: 24,
+              boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+              minWidth: 220,
+              maxWidth: 340,
+              minHeight: 380,
+              maxHeight: "90vh",
+              width: "90vw",
+              height: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <img src="/img/letter.png" alt="Letter" style={{ width: 90, marginBottom: 18 }} />
+            <div style={{
+              marginTop: 18,
+              fontSize: 24,
+              color: '#222',
+              textShadow: "0 1px 8px #fff, 0 1px 1px #ffb6c1"
+            }}>
+              Төрсөн өдрийн баярын мэнд хүргэе!
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default SuccessPage;
+

@@ -75,7 +75,7 @@
   .letter-floating-wrapper {
     position: absolute;
     width:90px;   /*hemjee*/
-    top: 0;
+    top: 0.5rem;
     right: 0.5rem;
     z-index: 10;
   margin: 0;

@@ -31,8 +31,8 @@ function CountdownTimer({ targetDate }) {
       timeLeft.minutes === 0 &&
       timeLeft.seconds === 0
     ) {
-      // Countdown дуусмагц success page рүү шилжинэ
-      navigate("/success");
+      // Countdown дуусмагц cake page рүү шилжинэ
+      navigate("/cake");
     } else {
       const timer = setTimeout(() => {
         setTimeLeft(calculateTimeLeft());

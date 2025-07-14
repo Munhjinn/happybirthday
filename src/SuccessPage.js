@@ -67,8 +67,14 @@ function SuccessPage() {
       {/* Хуучин floating letter icon-ыг click-д холбох */}
       <div
         className="letter-floating-wrapper"
-        style={{ cursor: "pointer" }}
-        onClick={() => setShowLetter(true)}
+        style={{ cursor: hasKey ? "pointer" : "not-allowed" }}
+        onClick={() => {
+          if (hasKey) {
+            setShowLetter(true);
+          } else {
+            alert("Эхлээд түлхүүрээ ол!");
+          }
+        }}
       >
         <div className="letter-rope-wrapper">
           <div className="letter-rope"></div>
@@ -145,7 +151,7 @@ function SuccessPage() {
         >
           <div
             style={{
-              background: `url('/img/letterback.jpg') center center / contain no-repeat, #fff`,
+              background: `url('/img/letterback.jpg') center center / contain no-repeat`,
               padding: 40,
               borderRadius: 24,
               boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
@@ -161,7 +167,7 @@ function SuccessPage() {
             }}
             onClick={e => e.stopPropagation()}
           >
-            <img src="/img/letter.png" alt="Letter" style={{ width: 90, marginBottom: 18 }} />
+            {/* <img src="/img/letter.png" alt="Letter" style={{ width: 90, marginBottom: 18 }} /> */}
             <div style={{
               marginTop: 18,
               fontSize: 24,

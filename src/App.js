@@ -4,6 +4,7 @@ import CountdownTimer from "./CountdownTimer";
 // import GiftBox from './GiftBox';
 import SuccessPage from './SuccessPage';
 import CakePage from './CakePage';
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const birthday = "2025-06-26T00:00:00";
@@ -11,9 +12,32 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<div className="center-screen"><CountdownTimer targetDate={birthday} /></div>} />
-        <Route path="/cake" element={<CakePage />} />
-        <Route path="/success" element={<SuccessPage />} />
+        <Route
+          path="/"
+          element={
+            <AnimatePresence mode="wait">
+              <div className="center-screen">
+                <CountdownTimer targetDate={birthday} />
+              </div>
+            </AnimatePresence>
+          }
+        />
+        <Route
+          path="/cake"
+          element={
+            <AnimatePresence mode="wait">
+              <CakePage />
+            </AnimatePresence>
+          }
+        />
+        <Route
+          path="/success"
+          element={
+            <AnimatePresence mode="wait">
+              <SuccessPage />
+            </AnimatePresence>
+          }
+        />
       </Routes>
     </Router>
   );

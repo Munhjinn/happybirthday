@@ -4,6 +4,7 @@ import LetterBox from "./LetterBox";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "./App.css";
 import Rain from './Rain';
+import { motion } from "framer-motion";
 
 const gifts = [
   { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#fC8EAC" },
@@ -54,7 +55,11 @@ function SuccessPage() {
   const onKeyFound = useCallback(() => setHasKey(true), []);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -40 }}
+      transition={{ duration: 0.6 }}
       className="App"
       style={{
         background: bgColor,
@@ -179,7 +184,7 @@ function SuccessPage() {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

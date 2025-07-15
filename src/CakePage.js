@@ -6,12 +6,31 @@ import { useWindowSize } from 'react-use';
 import confetti from 'canvas-confetti';
 
 const CAKE_ANIMATION = {
-  initial: { opacity: 0, y: -40 },
-  animate: (i) => ({ opacity: 1, y: 0, transition: { delay: 0.3 + i * 0.4, type: 'spring', stiffness: 80, damping: 14 } })
+  initial: { opacity: 0, y: -40, scaleY: 0.7 },
+  animate: (i) => ({
+    opacity: 1,
+    y: 0,
+    scaleY: 1,
+    transition: {
+      delay: 0.3 + i * 0.4,
+      type: 'spring',
+      stiffness: 80,
+      damping: 14
+    }
+  })
 };
 const ICING_ANIMATION = {
-  initial: { scaleY: 0, opacity: 0 },
-  animate: (i) => ({ scaleY: 1, opacity: 1, transition: { delay: 0.45 + i * 0.4, type: 'spring', stiffness: 80, damping: 12, originY: 0 } })
+  initial: { scaleY: 0, opacity: 0, transformOrigin: 'top' },
+  animate: (i) => ({
+    scaleY: 1,
+    opacity: 1,
+    transition: {
+      delay: 0.45 + i * 0.4,
+      type: 'spring',
+      stiffness: 80,
+      damping: 12
+    }
+  })
 };
 const DECOR_ANIMATION = {
   initial: { opacity: 0, scale: 0.7 },
@@ -42,17 +61,22 @@ const CakePage = () => {
   const navigate = useNavigate();
   const [isCandleLit, setIsCandleLit] = useState(true);
   const [showCongrats, setShowCongrats] = useState(false);
+  const [showWind, setShowWind] = useState(false);
+  const [showCloud, setShowCloud] = useState(true); // ← ШИНЭ STATE
   const { width, height } = useWindowSize();
 
   const handleBlowCandle = () => {
-    setIsCandleLit(false);
+    setShowWind(true);
+    setShowCloud(false);
     setTimeout(() => {
-      firework(); // салют буудна
+      setIsCandleLit(false); // салхи дууссаны дараа лаа унтарна
+      setShowWind(false);
+      firework();
       setShowCongrats(true);
       setTimeout(() => {
         navigate('/success');
       }, 10000);
-    }, 1000);
+    }, 1200); // салхи хэдэн секунд гарахыг энд тохируулна
   };
 
   return (
@@ -79,6 +103,7 @@ const CakePage = () => {
           lineHeight: 1.2,
         }}
       >
+        
   
       </motion.h1>
       
@@ -87,70 +112,146 @@ const CakePage = () => {
         width: '100%',
         maxWidth: '300px',
         marginBottom: 'clamp(20px, 5vw, 40px)',
+        position: 'relative',
       }}>
+        {/* Cloud зөвхөн showCloud үед */}
+        {showCloud && (
+          <>
+            <img 
+              src="/img/cloud.png" 
+              alt="Cloud" 
+              style={{
+                position: 'absolute',
+                top: '-100px',
+                left: '50%',
+                transform: 'translateX(-100%)',
+                width: '200px',
+                zIndex: 2,
+                pointerEvents: 'none',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: '-40px',
+                left: '50%',
+                transform: 'translateX(-100%)',
+                width: '200px',
+                textAlign: 'center',
+                color: '#ffffffff',
+                fontWeight: 'bold',
+                fontSize: '1.2rem',
+                zIndex: 3,
+                pointerEvents: 'none',
+                fontFamily: 'Great Vibes, cursive',
+                userSelect: 'none'
+              }}
+            >
+              Хүслээ  бодоод <br/>
+               лаагаа vлээгээрэй<br/>
+                хайрт минь
+            </div>
+          </>
+        )}
+
+        {/* WIND.PNG зөвхөн showWind үед лааны баруун талд */}
+        {showWind && (
+          <motion.img
+            src="/img/wind.png"
+            alt="Wind"
+            initial={{ opacity: 0, x: 40 }} // баруунаас fade-in
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 40 }}
+            transition={{ duration: 1, type: "spring" }}
+            style={{
+              position: 'absolute',
+              top: '36px',
+              left: '185px',
+              width: '55px',
+              zIndex: 5,
+              pointerEvents: 'none',
+            }}
+          />
+        )}
+
         <svg 
           width="100%" 
           height="auto" 
           viewBox="0 0 260 340" 
-          style={{ display: 'block' }}
+          style={{ display: 'block', position: 'relative', zIndex: 1 }}
           preserveAspectRatio="xMidYMid meet"
         >
           {/* White base/plate under the cake */}
           <rect x="10" y="250" width="240" height="18" rx="9" fill="#fff" />
           {/* Bottom tier group */}
-          <motion.g initial="initial" animate="animate" custom={2} variants={CAKE_ANIMATION}>
-            <rect x="30" y="180" width="200" height="70" rx="30" fill="#fae3d9" />
-            <motion.path
-              d="M30,210 Q60,250 90,210 Q120,170 150,210 Q180,250 230,210 L230,250 Q130,270 30,250 Z"
-              fill="#f9a1bc"
-              initial="initial"
-              animate="animate"
-              custom={2}
-              variants={ICING_ANIMATION}
-              style={{ transformOrigin: '130px 210px' }}
-            />
-            {/* Bottom dots */}
-            {[50, 80, 110, 140, 170, 200].map((cx, i) => (
-              <motion.circle key={cx} cx={cx} cy={240 + (i % 2) * 5} r="5" fill="#fff"
-                initial="initial" animate="animate" variants={DECOR_ANIMATION} custom={2.2 + i * 0.05} />
-            ))}
-          </motion.g>
+          <motion.g
+  initial="initial"
+  animate="animate"
+  custom={2}
+  variants={CAKE_ANIMATION}
+>
+  <rect x="30" y="180" width="200" height="70" rx="30" fill="#fae3d9" />
+  <motion.path
+    d="M30,210 Q60,250 90,210 Q120,170 150,210 Q180,250 230,210 L230,250 Q130,270 30,250 Z"
+    fill="#f9a1bc"
+    initial="initial"
+    animate="animate"
+    custom={2}
+    variants={ICING_ANIMATION}
+    style={{ transformOrigin: '130px 170px' }} // top хэсэгт origin-оо тохируулна
+  />
+  {/* Bottom dots */}
+  {[50, 80, 110, 140, 170, 200].map((cx, i) => (
+    <motion.circle key={cx} cx={cx} cy={240 + (i % 2) * 5} r="5" fill="#fff"
+      initial="initial" animate="animate" variants={DECOR_ANIMATION} custom={2.2 + i * 0.05} />
+  ))}
+</motion.g>
           {/* Middle tier group */}
-          <motion.g initial="initial" animate="animate" custom={1} variants={CAKE_ANIMATION}>
-            <rect x="50" y="130" width="160" height="60" rx="25" fill="#fff6e0" />
-            <motion.path
-              d="M50,160 Q80,200 110,160 Q140,120 170,160 Q200,200 210,160 L210,190 Q130,200 50,190 Z"
-              fill="#f9a1bc"
-              initial="initial"
-              animate="animate"
-              custom={1}
-              variants={ICING_ANIMATION}
-              style={{ transformOrigin: '130px 160px' }}
-            />
-            {/* Red balls */}
-            {[75, 105, 135, 165, 195].map((cx, i) => (
-              <motion.circle key={cx} cx={cx} cy={185 + (i % 2) * 10} r="7" fill="#ff4d6d"
-                initial="initial" animate="animate" variants={DECOR_ANIMATION} custom={1.2 + i * 0.05} />
-            ))}
-          </motion.g>
+          <motion.g
+  initial="initial"
+  animate="animate"
+  custom={1}
+  variants={CAKE_ANIMATION}
+>
+  <rect x="50" y="130" width="160" height="60" rx="25" fill="#fff6e0" />
+  <motion.path
+    d="M50,160 Q80,200 110,160 Q140,120 170,160 Q200,200 210,160 L210,190 Q130,200 50,190 Z"
+    fill="#f9a1bc"
+    initial="initial"
+    animate="animate"
+    custom={1}
+    variants={ICING_ANIMATION}
+    style={{ transformOrigin: '130px 120px' }}
+  />
+  {/* Red balls */}
+  {[75, 105, 135, 165, 195].map((cx, i) => (
+    <motion.circle key={cx} cx={cx} cy={185 + (i % 2) * 10} r="7" fill="#ff4d6d"
+      initial="initial" animate="animate" variants={DECOR_ANIMATION} custom={1.2 + i * 0.05} />
+  ))}
+</motion.g>
           {/* Top tier group */}
-          <motion.g initial="initial" animate="animate" custom={0} variants={CAKE_ANIMATION}>
-            <rect x="80" y="90" width="100" height="40" rx="20" fill="#fff6e0" />
-            <motion.path
-              d="M80,110 Q95,130 110,110 Q125,90 140,110 Q155,130 170,110 Q185,90 180,120 L180,130 Q130,135 80,130 Z"
-              fill="#f9a1bc"
-              initial="initial"
-              animate="animate"
-              custom={0}
-              variants={ICING_ANIMATION}
-              style={{ transformOrigin: '130px 110px' }}
-            />
-            {/* Yellow balls */}
-            {[100, 130, 160].map((cx, i) => (
-              <motion.circle key={cx} cx={cx} cy={125 + (i % 2) * 7} r="6" fill="#ffe066"
-                initial="initial" animate="animate" variants={DECOR_ANIMATION} custom={0.8 + i * 0.07} />
-            ))}
-          </motion.g>
+          <motion.g
+  initial="initial"
+  animate="animate"
+  custom={0}
+  variants={CAKE_ANIMATION}
+>
+  <rect x="80" y="90" width="100" height="40" rx="20" fill="#fff6e0" />
+  <motion.path
+    d="M80,110 Q95,130 110,110 Q125,90 140,110 Q155,130 170,110 Q185,90 180,120 L180,130 Q130,135 80,130 Z"
+    fill="#f9a1bc"
+    initial="initial"
+    animate="animate"
+    custom={0}
+    variants={ICING_ANIMATION}
+    style={{ transformOrigin: '130px 90px' }}
+  />
+  {/* Yellow balls */}
+  {[100, 130, 160].map((cx, i) => (
+    <motion.circle key={cx} cx={cx} cy={125 + (i % 2) * 7} r="6" fill="#ffe066"
+      initial="initial" animate="animate" variants={DECOR_ANIMATION} custom={0.8 + i * 0.07} />
+  ))}
+</motion.g>
           {/* Candle group - appears last */}
           <motion.g initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: CANDLE_DELAY, type: 'spring', stiffness: 80 }}>
             {/* Candle shadow */}
@@ -187,22 +288,36 @@ const CakePage = () => {
                 <motion.ellipse 
                   cx="131" cy="45" rx="9" ry="15" fill="url(#flameGlow)" opacity="0.5"
                   initial={{ opacity: 0, scale: 0.7 }} 
-                  animate={{ opacity: 1, scale: 1 }} 
+                  animate={{
+                    opacity: [0.5, 0.8, 0.5],
+                    scale: [1, 1.08, 1],
+                    transition: { repeat: Infinity, duration: 1.6, ease: "easeInOut" }
+                  }}
                   transition={{ delay: CANDLE_DELAY + 0.1, type: 'spring' }} 
                 />
-                {/* Main flame */}
+                {/* Main flame (шар) */}
                 <motion.path
                   d="M131,57 Q135,45 131,38 Q127,45 131,57 Z"
                   fill="url(#flameMain)"
                   initial={{ opacity: 0, scale: 0.7 }} 
-                  animate={{ opacity: 1, scale: 1 }} 
+                  animate={{
+                    opacity: [1, 0.8, 1],
+                    scaleY: [1, 1.12, 1],
+                    y: [0, -2, 0],
+                    transition: { repeat: Infinity, duration: 1.3, ease: "easeInOut" }
+                  }}
                   transition={{ delay: CANDLE_DELAY + 0.2, type: 'spring' }}
                 />
-                {/* Flame inner highlight */}
+                {/* Flame inner highlight (цагаан) */}
                 <motion.ellipse 
                   cx="131" cy="46" rx="2" ry="4" fill="#fffbe6" opacity="0.7"
                   initial={{ opacity: 0, scale: 0.7 }} 
-                  animate={{ opacity: 1, scale: 1 }} 
+                  animate={{
+                    opacity: [0.7, 1, 0.7],
+                    scaleY: [1, 1.18, 1],
+                    y: [0, -1, 0],
+                    transition: { repeat: Infinity, duration: 1.1, ease: "easeInOut" }
+                  }}
                   transition={{ delay: CANDLE_DELAY + 0.3, type: 'spring' }} 
                 />
               </>

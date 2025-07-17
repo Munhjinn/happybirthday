@@ -284,22 +284,24 @@ const CakePage = () => {
                     <stop offset="100%" stopColor="#ffb347" />
                   </linearGradient>
                 </defs>
-                {/* Flame glow */}
-                <motion.ellipse 
-                  cx="131" cy="45" rx="9" ry="15" fill="url(#flameGlow)" opacity="0.5"
-                  initial={{ opacity: 0, scale: 0.7 }} 
+                {/* Flame glow - дээд тал шовх, доод тал бөөрөнхий */}
+                <motion.path
+                  d="M131,30 Q137,40 131,60 Q125,40 131,30 Q131,30 131,30 Z"
+                  fill="url(#flameGlow)"
+                  opacity="0.5"
+                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={{
                     opacity: [0.5, 0.8, 0.5],
                     scale: [1, 1.08, 1],
                     transition: { repeat: Infinity, duration: 1.6, ease: "easeInOut" }
                   }}
-                  transition={{ delay: CANDLE_DELAY + 0.1, type: 'spring' }} 
+                  transition={{ delay: CANDLE_DELAY + 0.1, type: 'spring' }}
                 />
                 {/* Main flame (шар) */}
                 <motion.path
                   d="M131,57 Q135,45 131,38 Q127,45 131,57 Z"
                   fill="url(#flameMain)"
-                  initial={{ opacity: 0, scale: 0.7 }} 
+                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={{
                     opacity: [1, 0.8, 1],
                     scaleY: [1, 1.12, 1],
@@ -309,16 +311,16 @@ const CakePage = () => {
                   transition={{ delay: CANDLE_DELAY + 0.2, type: 'spring' }}
                 />
                 {/* Flame inner highlight (цагаан) */}
-                <motion.ellipse 
+                <motion.ellipse
                   cx="131" cy="46" rx="2" ry="4" fill="#fffbe6" opacity="0.7"
-                  initial={{ opacity: 0, scale: 0.7 }} 
+                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={{
                     opacity: [0.7, 1, 0.7],
                     scaleY: [1, 1.18, 1],
                     y: [0, -1, 0],
                     transition: { repeat: Infinity, duration: 1.1, ease: "easeInOut" }
                   }}
-                  transition={{ delay: CANDLE_DELAY + 0.3, type: 'spring' }} 
+                  transition={{ delay: CANDLE_DELAY + 0.3, type: 'spring' }}
                 />
               </>
             )}

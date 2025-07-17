@@ -223,7 +223,7 @@ html, body {
 
 .birthday-title {
   font-family: 'Great Vibes', cursive;
-  color: #e63950;
+  color: #ffffff;
   font-size: 2.5rem;
   text-align: center;
   margin-top: 1.2rem;
@@ -232,25 +232,15 @@ html, body {
   letter-spacing: 1px;
 }
 
-.birthday-subtitle {
-  font-family: 'Great Vibes', cursive;
-  color: #e63950;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-weight: normal;
-  letter-spacing: 1px;
-}
+
 
 @media (max-width: 400px) {
   .birthday-title {
-    font-size: 2.2rem;
-    margin-top: 0.1rem;
+    font-size: 2.5rem;
+    margin-top: 0.1rem; /* Эндээс илүү багасгаж болно */
     margin-bottom: 0.2rem;
-  }
-  .birthday-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
+    position: relative;
+    top: -3.0rem; /* Дээш зөөх */
   }
 }
 
@@ -261,4 +251,25 @@ html, body {
 
 .letter-message, .message {
   font-family: 'Dancing Script', cursive;
+}
+
+.letter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .letter-popup {
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    padding: 12px 4px !important;
+    border-radius: 14px !important;
+    max-height: 65vh !important;
+    box-sizing: border-box !important;
+  }
+  .letter-scroll {
+    max-height: 65vh !important;
+    font-size: 16px !important;
+    padding: 0 25px !important;
+    box-sizing: border-box !important;
+  }
 }

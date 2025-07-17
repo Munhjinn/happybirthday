@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 const gifts = [
   { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#fC8EAC" },
   { id: 2, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise2.jpg", type: "gift", bg: "#FCBACB" },
-  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise3.jpeg", type: "gift", bg: "#ECBDC4" },
+  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "", type: "gift", bg: "#ECBDC4" },
   // { id: 4, letter: "/img/letter.png", type: "letter", bg: "#ff9999", message: "Төрсөн өдрийн баярын мэнд хүргэе! ..." } 
 ];
   
@@ -67,8 +67,9 @@ function SuccessPage() {
       }}
     >
       <Rain onKeyFound={onKeyFound} />
-      <h1 className="birthday-title">Happy Birthday</h1>
-      <h1 className="birthday-subtitle">My Dear Princess</h1>
+      <h1 className="birthday-title">Үзэсгэлэнт гүнждээ <br/>
+                                      төрсөн өдрийн мэнд <br/>хүргэе</h1>
+      
       {/* Хуучин floating letter icon-ыг click-д холбох */}
       <div
         className="letter-floating-wrapper"
@@ -117,12 +118,21 @@ function SuccessPage() {
           <div className={`carousel-gift ${isAnimating ? (direction === "right" ? "slide-in-right" : "slide-in-left") : ""}`}>
             {gifts[current].type === "gift" ? (
               <GiftBox
-                closedImg={gifts[current].closed}
-                openImg={gifts[current].opened}
-                surpriseImg={gifts[current].surprise}
-                open={opened[current]}
-                onOpen={() => handleOpen(current)}
-              />
+  closedImg={gifts[current].closed}
+  openImg={gifts[current].opened}
+  surpriseImg={gifts[current].surprise}
+  open={opened[current]}
+  onOpen={() => handleOpen(current)}
+  index={current}
+  onClose={() => {
+    // 3 дахь popup-ийг хаах
+    setOpened(prev => {
+      const arr = [...prev];
+      arr[2] = false;
+      return arr;
+    });
+  }}
+/>
             ) : (
               <LetterBox
                 hasKey={hasKey}
@@ -155,31 +165,67 @@ function SuccessPage() {
           onClick={() => setShowLetter(false)}
         >
           <div
+            className="letter-popup"
             style={{
-              background: `url('/img/letterback.jpg') center center / contain no-repeat`,
-              padding: 40,
+              background: "#fff",
+              padding: "32px 24px",
               borderRadius: 24,
               boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
               minWidth: 220,
               maxWidth: 340,
-              minHeight: 380,
+              minHeight: 220,
               maxHeight: "90vh",
               width: "90vw",
               height: "auto",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
+              boxSizing: "border-box"
             }}
             onClick={e => e.stopPropagation()}
           >
-            {/* <img src="/img/letter.png" alt="Letter" style={{ width: 90, marginBottom: 18 }} /> */}
-            <div style={{
-              marginTop: 18,
-              fontSize: 24,
-              color: '#222',
-              textShadow: "0 1px 8px #fff, 0 1px 1px #ffb6c1"
-            }}>
-              Төрсөн өдрийн баярын мэнд хүргэе!
+            {/* Title нэмэх хэсэг */}
+            <div
+              style={{
+                fontFamily: "'Great Vibes', cursive",
+                fontSize: "2.2rem",
+                color: "#e63950",
+                marginBottom: "12px",
+                textAlign: "center"
+              }}
+            >
+              Захидал
+            </div>
+            {/* ...текст хэсэг... */}
+            <div
+              style={{
+                marginTop: 0,
+                fontSize: 16,
+                color: '#222',
+                fontFamily: "'Sacramento', cursive",
+                textShadow: "0 1px 8px #fff, 0 1px 1px #ffb6c1",
+                maxHeight: "60vh",
+                overflowY: "auto",
+                width: "100%",
+                textAlign: "justify",
+                padding: "0 8px",
+                background: "rgba(255,255,255,0.05)",
+                borderRadius: 12,
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                boxSizing: "border-box"
+              }}
+              className="letter-scroll"
+            >
+              dolor sit amet, consectetur adipiscing elit. Nullam nec sapien ligula. Morbi gravida auctor dui in pharetra. Sed mollis efficitur auctor. Fusce pellentesque lacinia mi, eu placerat leo. Sed laoreet in massa et lacinia. Morbi vel tempus mauris. Pellentesque hendrerit pellentesque iaculis.
+              Aenean placerat tincidunt consequat. Sed feugiat gravida tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas vitae lorem justo. Proin malesuada risus eu urna pellentesque, at sodales libero iaculis. Nullam volutpat nisi lectus, convallis fermentum tellus accumsan quis. Ut at felis ullamcorper, ultrices tellus vel, rutrum sapien. Sed eu gravida lacus, ut ultrices purus. Nam fringilla vehicula dui sit amet pellentesque. Praesent vehicula laoreet arcu, ornare sollicitudin est aliquet at. Phasellus lacinia fringilla maximus.
+
+              Sed auctor, nunc a lacinia efficitur, ante velit tempor diam, et sodales metus nisi luctus tortor. Phasellus at augue sit amet lacus tristique gravida eget eget velit. Etiam quis nisl nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam vehicula sollicitudin est non tristique. Nam a mattis dolor. Nunc quis mauris pharetra, pellentesque eros tempor, pellentesque eros.
+
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec sapien ligula. Morbi gravida auctor dui in pharetra. Sed mollis efficitur auctor. Fusce pellentesque lacinia mi, eu placerat leo. Sed laoreet in massa et lacinia. Morbi vel tempus mauris. Pellentesque hendrerit pellentesque iaculis.
+              Aenean placerat tincidunt consequat. Sed feugiat gravida tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas vitae lorem justo. Proin malesuada risus eu urna pellentesque, at sodales libero iaculis. Nullam volutpat nisi lectus, convallis fermentum tellus accumsan quis. Ut at felis ullamcorper, ultrices tellus vel, rutrum sapien. Sed eu gravida lacus, ut ultrices purus. Nam fringilla vehicula dui sit amet pellentesque. Praesent vehicula laoreet arcu, ornare sollicitudin est aliquet at. Phasellus lacinia fringilla maximus.
+
+              Sed auctor, nunc a lacinia efficitur, ante velit tempor diam, et sodales metus nisi luctus tortor. Phasellus at augue sit amet lacus tristique gravida eget eget velit. Etiam quis nisl nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam vehicula sollicitudin est non tristique. Nam a mattis dolor. Nunc quis mauris pharetra, pellentesque eros tempor, pellentesque eros.
             </div>
           </div>
         </div>

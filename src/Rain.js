@@ -71,10 +71,10 @@ const Rain = ({ onKeyFound }) => {
           ctx.save();
           ctx.font = `${Math.max(16, drop.length)}px Arial`;
           ctx.fillStyle = '#fff';
-          ctx.strokeStyle = '#ff4d6d';
-          ctx.lineWidth = 2;
+          // ctx.strokeStyle = '#ff4d6d';
+          // ctx.lineWidth = 2;
           ctx.textAlign = 'center';
-          ctx.strokeText(drop.message, drop.x, drop.y - drop.length);
+          // / ctx.strokeText(drop.message, drop.x, drop.y - drop.length);
           ctx.fillText(drop.message, drop.x, drop.y - drop.length);
           ctx.restore();
         }

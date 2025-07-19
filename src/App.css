@@ -222,7 +222,9 @@ html, body {
 }
 
 .birthday-title {
-  font-family: 'Great Vibes', cursive;
+  font-family: "Lobster", sans-serif;
+  font-weight: 200;
+  font-style: normal;
   color: #ffffff;
   font-size: 2.5rem;
   text-align: center;
@@ -236,7 +238,8 @@ html, body {
 
 @media (max-width: 400px) {
   .birthday-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    
     margin-top: 0.1rem; /* Эндээс илүү багасгаж болно */
     margin-bottom: 0.2rem;
     position: relative;

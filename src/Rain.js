@@ -115,7 +115,7 @@ const Rain = ({ onKeyFound }) => {
         if (dist < drop.length) {
           if (drop.clicked) return;
           drops.current.forEach(d => d.showMessage = false);
-          if (!hasKey.current && clickedCount.current === 2) {
+          if (!hasKey.current && clickedCount.current === 9) {
             drop.showMessage = true;
             drop.message = 'Түлхүүр';
             hasKey.current = true;

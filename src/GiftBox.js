@@ -26,7 +26,7 @@ function GiftBox({ closedImg, openImg, surpriseImg, open, onOpen, index, onClose
           >
             <div
               style={{
-                background: "#fff",
+                background: "#F7FCFE",
                 padding: "32px 24px",
                 borderRadius: 24,
                 boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
@@ -46,9 +46,10 @@ function GiftBox({ closedImg, openImg, surpriseImg, open, onOpen, index, onClose
             >
               <div
                 style={{
-                  fontFamily: "'Great Vibes', cursive",
+           
+                  fontFamily: "'Lobster', sans-serif",
                   fontSize: "25px",
-                  color: "#000000ff",
+                  color: "#0D0907",
                   marginBottom: "12px",
                   textAlign: "center"
                 }}
@@ -98,8 +99,8 @@ function GiftBox({ closedImg, openImg, surpriseImg, open, onOpen, index, onClose
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  width: 120,
-                  height: 120,
+                  width: 220,
+                  height: 220,
                   objectFit: "contain",
                   borderRadius: 12,
                   boxShadow: "0 2px 8px rgba(0,0,0,0.08)"

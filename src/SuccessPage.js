@@ -7,9 +7,9 @@ import Rain from './Rain';
 import { motion } from "framer-motion";
 
 const gifts = [
-  { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#fC8EAC" },
+  { id: 1, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise1.jpg", type: "gift", bg: "#fa94afff" },
   { id: 2, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "/img/surprise2.jpg", type: "gift", bg: "#FCBACB" },
-  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "", type: "gift", bg: "#ECBDC4" },
+  { id: 3, closed: "/img/gift-closed.png", opened: "/img/gift-opened.png", surprise: "", type: "gift", bg: "#eba5b0ff" },
   // { id: 4, letter: "/img/letter.png", type: "letter", bg: "#ff9999", message: "Төрсөн өдрийн баярын мэнд хүргэе! ..." } 
 ];
   
@@ -78,7 +78,7 @@ function SuccessPage() {
           if (hasKey) {
             setShowLetter(true);
           } else {
-            alert("Эхлээд түлхүүрээ ол!");
+            alert("Find the key first to open the letter"); // түлхүүр олдоогүй бол alert харуулна
           }
         }}
       >
@@ -118,21 +118,21 @@ function SuccessPage() {
           <div className={`carousel-gift ${isAnimating ? (direction === "right" ? "slide-in-right" : "slide-in-left") : ""}`}>
             {gifts[current].type === "gift" ? (
               <GiftBox
-  closedImg={gifts[current].closed}
-  openImg={gifts[current].opened}
-  surpriseImg={gifts[current].surprise}
-  open={opened[current]}
-  onOpen={() => handleOpen(current)}
-  index={current}
-  onClose={() => {
-    // 3 дахь popup-ийг хаах
-    setOpened(prev => {
-      const arr = [...prev];
-      arr[2] = false;
-      return arr;
-    });
-  }}
-/>
+                  closedImg={gifts[current].closed}
+                  openImg={gifts[current].opened}
+                  surpriseImg={gifts[current].surprise}
+                  open={opened[current]}
+                  onOpen={() => handleOpen(current)}
+                  index={current}
+                  onClose={() => {
+                  // 3 дахь popup-ийг хаах
+                  setOpened(prev => {
+                    const arr = [...prev];
+                    arr[2] = false;
+                    return arr;
+                  });
+                }}
+              />
             ) : (
               <LetterBox
                 hasKey={hasKey}
@@ -167,7 +167,7 @@ function SuccessPage() {
           <div
             className="letter-popup"
             style={{
-              background: "#fff",
+              background: "#F7FCFE",
               padding: "32px 24px",
               borderRadius: 24,
               boxShadow: "0 8px 32px rgba(0,0,0,0.18)",

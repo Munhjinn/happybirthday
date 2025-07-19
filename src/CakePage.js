@@ -169,7 +169,7 @@ const CakePage = () => {
               left: '185px',
               width: '55px',
               zIndex: 5,
-              pointerEvents: 'none',
+              pointerEvents: 'none'
             }}
           />
         )}

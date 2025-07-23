@@ -394,7 +394,7 @@ const CakePage = () => {
               zIndex: 10,
             }}
           >
-            Happy Birthday!
+        
           </motion.h2>
           <Confetti width={width} height={height} />
         </>

@@ -7,7 +7,7 @@ import CakePage from './CakePage';
 import { AnimatePresence } from "framer-motion";
 
 function App() {
-  const birthday = "2025-06-26T00:00:00";
+  const birthday = "2025-07-26T00:00:00";
 
   return (
     <Router>
